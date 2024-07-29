@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const RecentTransactionsContainer = styled.div`
-  background-color: #ffffff;
+  /* background-color: #ffffff;
   border-radius: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-  flex: 1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  flex: 2;
+  height: auto;
 `;
 
 const SectionTitle = styled.h2`
@@ -14,19 +14,28 @@ const SectionTitle = styled.h2`
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
-`;
-
-const TransactionList = styled.ul`
-  list-style: none;
-  padding: 0;
   margin: 0;
+  padding-bottom: 1rem;
 `;
 
-const TransactionItem = styled.li`
+const TransactionList = styled.div`
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: fit-content;
+  width: 100%;
+  border-radius: 25px;
+  padding: 1rem;
+`;
+
+const TransactionItem = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 0;
+  width: 100%;
   border-bottom: 1px solid #e0e0e0;
 `;
 
@@ -39,7 +48,7 @@ const TransactionIcon = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: ${props => props.bgColor};
+  background-color: ${(props) => props.bgColor};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,15 +66,33 @@ const TransactionDate = styled.span`
 `;
 
 const TransactionAmount = styled.span`
-  color: ${({ isPositive }) => (isPositive ? '#4caf50' : '#f44336')};
+  color: ${({ isPositive }) => (isPositive ? "#4caf50" : "#f44336")};
   font-size: 1rem;
   font-weight: bold;
 `;
 
 const transactions = [
-  { icon: '📄', bgColor: '#FFF6E3', description: 'Deposit from my Card', date: '28 January 2021', amount: -850 },
-  { icon: '📱', bgColor: '#E6F6FF', description: 'Deposit Paypal', date: '25 January 2021', amount: 2500 },
-  { icon: '👤', bgColor: '#E6FFF3', description: 'Jemi Wilson', date: '21 January 2021', amount: 5400 },
+  {
+    icon: "📄",
+    bgColor: "#FFF6E3",
+    description: "Deposit from my Card",
+    date: "28 January 2021",
+    amount: -850,
+  },
+  {
+    icon: "📱",
+    bgColor: "#E6F6FF",
+    description: "Deposit Paypal",
+    date: "25 January 2021",
+    amount: 2500,
+  },
+  {
+    icon: "👤",
+    bgColor: "#E6FFF3",
+    description: "Jemi Wilson",
+    date: "21 January 2021",
+    amount: 5400,
+  },
 ];
 
 const RecentTransactions = () => {
@@ -76,7 +103,9 @@ const RecentTransactions = () => {
         {transactions.map((transaction, index) => (
           <TransactionItem key={index}>
             <TransactionInfo>
-              <TransactionIcon bgColor={transaction.bgColor}>{transaction.icon}</TransactionIcon>
+              <TransactionIcon bgColor={transaction.bgColor}>
+                {transaction.icon}
+              </TransactionIcon>
               <TransactionDescription>
                 {transaction.description}
                 <br />
@@ -84,7 +113,8 @@ const RecentTransactions = () => {
               </TransactionDescription>
             </TransactionInfo>
             <TransactionAmount isPositive={transaction.amount > 0}>
-              {transaction.amount > 0 ? '+' : '-'}${Math.abs(transaction.amount)}
+              {transaction.amount > 0 ? "+" : "-"}$
+              {Math.abs(transaction.amount)}
             </TransactionAmount>
           </TransactionItem>
         ))}
